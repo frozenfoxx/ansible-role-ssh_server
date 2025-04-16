@@ -1,0 +1,18 @@
+galaxy_info:
+  author: frozenfoxx
+  description: OpenSSH server setup
+  company: Cult of Foxx
+  role_name: ssh_server
+  namespace: frozenfoxx
+
+  license: Apache-2.0
+
+  min_ansible_version: "2.10"
+
+  galaxy_tags:
+    - ssh
+    - tools
+    - linux
+    - windows
+
+dependencies: []
