@@ -12,8 +12,12 @@ Ansible role to set up OpenSSH.
 ```
 - hosts: all
   roles:
-    - { role: frozenfoxx.openssh_server }
+    - { role: frozenfoxx.ssh_server }
 ```
+
+# Variables
+
+* `ssh_server_windows_disableadminauthkeys`: disables system-wide Administrators authorized keys file (default: `True`)
 
 # License
 

@@ -1,0 +1,6 @@
+---
+- name: Handle setup for Windows
+  ansible.builtin.import_tasks: windows.yml
+  when: ansible_facts['os_family']|lower == 'windows'
+  tags:
+    - ssh_server

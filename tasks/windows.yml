@@ -1,0 +1,43 @@
+---
+- name: Set the default shell to PowerShell
+  ansible.windows.win_regedit:
+    path: HKLM:\SOFTWARE\OpenSSH
+    name: DefaultShell
+    data: C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe
+    type: string
+    state: present
+  tags:
+    - ssh_server
+
+- name: Reset SSH connection after shell change
+  ansible.builtin.meta: reset_connection
+  tags:
+    - ssh_server
+
+- name: Set the default shell to cmd
+  ansible.windows.win_regedit:
+    path: HKLM:\SOFTWARE\OpenSSH
+    name: DefaultShell
+    state: absent
+  tags:
+    - ssh_server
+
+- name: Reset SSH connection after shell change
+  ansible.builtin.meta: reset_connection
+  tags:
+    - ssh_server
+
+- name: Disable administrators_authorized_keys
+  when: ssh_server_windows_disableadminauthkeys == True
+  block:
+    - name: Comment Match Group administrators
+        path: "C:\ProgramData\ssh\sshd_config"
+        regex: '^Match\ Group\ administrators'
+        line: '#Match Group administrators'
+
+    - name: Comment Administrators AuthorizedKeysFile
+        path: "C:\ProgramData\ssh\sshd_config"
+        regex: '^.*AuthorizedKeysFile\ \__PROGRAMDATA__\/ssh\/administrators_authorized_keys'
+        line: '#AuthorizedKeysFile __PROGRAMDATA__/ssh/administrators_authorized_keys'
+  tags:
+    - ssh_server
