@@ -31,12 +31,12 @@
   when: ssh_server_windows_disableadminauthkeys == True
   block:
     - name: Comment Match Group administrators
-        path: "C:\ProgramData\ssh\sshd_config"
+        path: 'C:\ProgramData\ssh\sshd_config'
         regex: '^Match\ Group\ administrators'
         line: '#Match Group administrators'
 
     - name: Comment Administrators AuthorizedKeysFile
-        path: "C:\ProgramData\ssh\sshd_config"
+        path: 'C:\ProgramData\ssh\sshd_config'
         regex: '^.*AuthorizedKeysFile\ \__PROGRAMDATA__\/ssh\/administrators_authorized_keys'
         line: '#AuthorizedKeysFile __PROGRAMDATA__/ssh/administrators_authorized_keys'
   tags:
