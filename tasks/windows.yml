@@ -14,11 +14,19 @@
   tags:
     - ssh_server
 
-- name: Uncomment public key authentication
+- name: Enable public key authentication
   community.windows.win_lineinfile:
     path: 'C:\ProgramData\ssh\sshd_config'
     regex: '^#PubkeyAuthentication yes'
     line: 'PubkeyAuthentication yes'
+  tags:
+    - ssh_server
+
+- name: Disable strict modes
+  community.windows.win_lineinfile:
+    path: 'C:\ProgramData\ssh\sshd_config'
+    regex: '^#StrictModes yes'
+    line: 'StrictModes no'
   tags:
     - ssh_server
 
