@@ -46,3 +46,10 @@
         line: '#AuthorizedKeysFile __PROGRAMDATA__/ssh/administrators_authorized_keys'
   tags:
     - ssh_server
+
+- name: Deploy Administrators authorized_keys
+  ansible.windows.win_copy:
+    dest: C:\ProgramData\ssh\administrators_authorized_keys
+    content: "{{ ssh_server_windows_adminauthorizedkeys }}"
+  tags:
+    - ssh_server

@@ -18,6 +18,14 @@ Ansible role to set up OpenSSH.
 # Variables
 
 * `ssh_server_windows_disableadminauthkeys`: disables system-wide Administrators authorized keys file (default: `True`)
+* `ssh_server_windows_adminauthorizedkeys`: content of the `administrators_authorized_keys` file (default: nil)
+  * **Note**: it is recommended to use a `|` operator to set multiline contents, such as:
+  ```
+  ssh_server_windows_adminauthorizedkeys: |
+    somekey
+    someotherkey
+    [...]
+  ```
 
 # License
 
