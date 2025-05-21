@@ -14,16 +14,11 @@
   tags:
     - ssh_server
 
-- name: Set the default shell to cmd
-  ansible.windows.win_regedit:
-    path: 'HKLM:\SOFTWARE\OpenSSH'
-    name: 'DefaultShell'
-    state: absent
-  tags:
-    - ssh_server
-
-- name: Reset SSH connection after shell change
-  ansible.builtin.meta: reset_connection
+- name: Uncomment public key authentication
+  community.windows.win_lineinfile:
+    path: 'C:\ProgramData\ssh\sshd_config'
+    regex: '^#PubkeyAuthentication yes'
+    line: 'PubkeyAuthentication yes'
   tags:
     - ssh_server
 
