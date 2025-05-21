@@ -1,3 +1,2 @@
 ---
 ssh_server_windows_disableadminauthkeys: True
-ssh_server_users: []
